@@ -5,12 +5,14 @@ const loadMeals=(searchText)=>{
 
 const displayMeals=(meals)=>{
     const mealsContainer=document.getElementById('meals-container')
-    mealsContainer.textContent=" "
+    // console.log(typeof meals)
+    mealsContainer.textContent= ""
     // age ja thakbe seta khali korar jonne textContent blank
-    document.getElementById('search-field').value=" "
-    // age ja thakbe seta khali korar jonne blank
+    document.getElementById('search-field').value= ""
+    // age ja input field e thakbe seta khali korar jonne blank
     meals.forEach(meal=>{
         // console.log(meal.idMeal)
+        // console.log(typeof meal)
         const div=document.createElement('div')
         const {strMeal,strMealThumb,strInstructions,idMeal}=meal;
         div.classList.add('col')
@@ -44,10 +46,18 @@ const displayMealsDetails=(mealDetails)=>{
 
 
 //search text value 
-const loadMealsData=()=>{
+const loadMealsData=(datalimit)=>{
 const searchValue=document.getElementById('search-field')
 const searchText=searchValue.value
 // console.log(searchText)
-loadMeals(searchText)
+loadMeals(searchText, datalimit)
 }
+
+// search enter button
+document.getElementById('search-field').addEventListener('keypress', function(e){
+    if(e.key==='Enter'){
+        loadMealsData(10)
+        // console.log(e.key)
+    }
+})
 loadMeals('rice')
